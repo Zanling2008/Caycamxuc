@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Vườn Cảm Xúc</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(180deg, #e8f5e9, #f1f8e9);
+      color: #2e4d3f;
+    }
+    header {
+      text-align: center;
+      padding: 20px;
+    }
+    h1 {
+      margin-bottom: 5px;
+    }
+    .garden {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+    .leaf {
+      background: #ffffff;
+      border-radius: 60% 60% 60% 60%;
+      padding: 25px 15px;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .leaf:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+    }
+    .result {
+      padding: 20px;
+      background: #ffffff;
+      margin: 20px;
+      border-radius: 16px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    }
+    .chat {
+      padding: 20px;
+      margin: 20px;
+      background: #f9fff9;
+      border-radius: 16px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    }
+    .chat-box {
+      height: 150px;
+      border: 1px solid #c8e6c9;
+      border-radius: 10px;
+      padding: 10px;
+      overflow-y: auto;
+      margin-bottom: 10px;
+      background: #ffffff;
+    }
+    .chat input {
+      width: 75%;
+      padding: 8px;
+      border-radius: 8px;
+      border: 1px solid #c8e6c9;
+    }
+    .chat button {
+      padding: 8px 12px;
+      border: none;
+      border-radius: 8px;
+      background: #66bb6a;
+      color: white;
+      cursor: pointer;
+    }
+    footer {
+      text-align: center;
+      padding: 12px;
+      font-size: 13px;
+      color: #555;
+      background: #e0f2f1;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🌿 Vườn Cảm Xúc</h1>
+    <p>Hãy chọn chiếc lá thể hiện cảm xúc của bạn</p>
+  </header>
+
+  <section class="garden">
+    <div class="leaf" onclick="showHelp('vui')">😊<br/>Vui</div>
+    <div class="leaf" onclick="showHelp('buon')">😢<br/>Buồn</div>
+    <div class="leaf" onclick="showHelp('tuc')">😠<br/>Tức giận</div>
+    <div class="leaf" onclick="showHelp('lo')">😟<br/>Lo lắng</div>
+    <div class="leaf" onclick="showHelp('so')">😨<br/>Sợ hãi</div>
+    <div class="leaf" onclick="showHelp('trong')">😶<br/>Trống rỗng</div>
+  </section>
+
+  <section class="result" id="result">
+    <b>Gợi ý cải thiện cảm xúc sẽ hiển thị tại đây 🌱</b>
+  </section>
+
+  <section class="chat">
+    <h3>💬 Trò chuyện với AI</h3>
+    <div class="chat-box" id="chatBox"></div>
+    <input type="text" id="userInput" placeholder="Nhập điều bạn đang nghĩ..." />
+    <button onclick="sendMessage()">Gửi</button>
+  </section>
+
+  <footer>
+    Website này không thay thế chuyên gia tâm lý
+  </footer>
+
+  <script>
+    function showHelp(type) {
+      const tips = {
+        vui: 'Hãy ghi lại điều khiến bạn vui hôm nay và chia sẻ năng lượng tích cực đó với người khác.',
+        buon: 'Cho phép bản thân được buồn, thử nghe nhạc nhẹ hoặc viết ra cảm xúc của bạn.',
+        tuc: 'Hít thở sâu 3 lần, tạm rời xa điều khiến bạn tức giận trong vài phút.',
+        lo: 'Chia nhỏ vấn đề và tập trung vào điều bạn có thể kiểm soát ngay lúc này.',
+        so: 'Nhắc nhở bản thân rằng cảm xúc này rồi sẽ qua, bạn đang an toàn.',
+        trong: 'Thử làm một việc nhỏ có ý nghĩa: đi bộ, uống nước, hoặc trò chuyện với ai đó.'
+      };
+      document.getElementById('result').innerText = tips[type];
+    }
+
+    function sendMessage() {
+      const input = document.getElementById('userInput');
+      const chatBox = document.getElementById('chatBox');
+      if (!input.value) return;
+
+      chatBox.innerHTML += `<div><b>Bạn:</b> ${input.value}</div>`;
+      chatBox.innerHTML += `<div><b>AI:</b> Mình đang lắng nghe bạn. Bạn có thể nói thêm không?</div>`;
+      input.value = '';
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+  </script>
+</body>
+</html>
